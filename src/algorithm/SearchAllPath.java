@@ -13,5 +13,8 @@ public class SearchAllPath {
         s.push(4);
         List<Integer> list = new ArrayList<Integer>(s);
         int a;
+
+
+
     }
 }
