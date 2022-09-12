@@ -9,4 +9,16 @@ public class ListNode {
     public ListNode() {}
     public ListNode(int val) { this.val = val; }
     public ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
+
+    public static ListNode buildLinkedList(int[] vals){
+        ListNode head = new ListNode(vals[0]);
+        ListNode h = head;
+        for(int i=1;i<vals.length;i++){
+            ListNode next = new ListNode(vals[i]);
+            h.next=next;
+            h=h.next;
+        }
+        return head;
+    }
 }
