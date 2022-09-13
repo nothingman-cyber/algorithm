@@ -7,6 +7,7 @@ import java.util.List;
 public class RecoverIpAddress {
 
     public static void main(String[] args) {
+
         String s = "25525511135";
         List<String> res = new RecoverIpAddress().restoreIpAddresses(s);
         int i=1;
@@ -31,10 +32,10 @@ public class RecoverIpAddress {
 
     private void dfs(List<String> ip, char[] ipString, int idx, int segment){
         int restMinSpace=4-segment;//给后面留下来的最小空间
-        int idxSide=ipString.length-restMinSpace;//根据最小空间，当前段落所能触及的边界下标
+        int idxSide=ipString.length-restMinSpace-1;//根据最小空间，当前段落所能触及的边界下标
         if(segment<4){
             for(int i=idx;i<=idxSide;i++){
-                if(idxSide-i<3){
+                if(i-idx<3){
                     int segIp=valid(ipString,idx,i);
                     if(segIp!=-1){
                         ip.add(Integer.toString(segIp));
@@ -44,14 +45,14 @@ public class RecoverIpAddress {
                 }
             }
         }else if(segment==4){
-            for(int i=idx;i<=idxSide;i++){
-                if(idxSide-i<3){
-                    int segIp=valid(ipString,idx,i);
-                    if(segIp!=-1){
-                        ip.add(Integer.toString(segIp));
-                        res.add(new ArrayList<>(ip));
-                        ip.remove(ip.size()-1);
-                    }
+            if(idxSide-idx>=3){
+                return;
+            }else{
+                int segIp=valid(ipString,idx,idxSide);
+                if(segIp!=-1){
+                    ip.add(Integer.toString(segIp));
+                    res.add(new ArrayList<>(ip));
+                    ip.remove(ip.size()-1);
                 }
             }
         }
